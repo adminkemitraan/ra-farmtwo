@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wize Promo - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        oswald: ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Oswald', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden relative">
+        
+        <!-- Logout Button -->
+        <button id="logoutBtn" class="absolute top-4 right-4 text-white/80 hover:text-white transition-colors">
+            <i class="fa-solid fa-right-from-bracket text-xl"></i>
+        </button>
+
+        <!-- Header -->
+        <div class="bg-blue-600 p-6 text-center pt-10">
+            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
+                <i class="fa-solid fa-user text-2xl text-white"></i>
+            </div>
+            <h1 class="text-2xl font-bold text-white tracking-wide" id="userNameDisplay">Halo, User</h1>
+            <p class="text-blue-100 text-sm" id="userPhoneDisplay">+62 8xx-xxxx-xxxx</p>
+        </div>
+
+        <!-- Saldo Display -->
+        <div class="p-6 text-center -mt-6">
+            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                <p class="text-gray-500 text-xs uppercase tracking-wide font-bold mb-1">Total Saldo Aktif</p>
+                <div class="grid grid-cols-2 gap-4 mb-2">
+                    <div class="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                        <p class="text-[10px] text-blue-500 font-bold mb-1">SINGAPORE DOLLAR</p>
+                        <div class="text-2xl font-bold text-blue-700" id="saldoSGD">SGD 0</div>
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-100">
+                        <p class="text-[10px] text-emerald-500 font-bold mb-1">RINGGIT MALAYSIA</p>
+                        <div class="text-2xl font-bold text-emerald-700" id="saldoMYR">RM 0</div>
+                    </div>
+                </div>
+                
+                <!-- Tombol Tarik -->
+                <button id="withdrawBtn" class="mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors">
+                    <i class="fa-brands fa-whatsapp"></i> Tarik Saldo (Verifikasi Admin)
+                </button>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="px-6 pb-8">
+            <div class="mb-4">
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Klaim Kode Promo</h3>
+                <form id="promoForm" class="space-y-3">
+                    <div class="flex gap-2">
+                        <input type="text" id="promoCode" 
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors uppercase placeholder-gray-400 text-sm"
+                            placeholder="Masukan Kode" required>
+                        <button type="submit" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 rounded-lg transition-colors">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Notification Area -->
+            <div id="notification" class="hidden p-3 rounded-lg text-sm font-medium text-center mb-4"></div>
+
+            <!-- History (Static for Demo) -->
+            <div>
+                <h3 class="text-sm font-bold text-gray-500 uppercase mb-3">Riwayat Transaksi</h3>
+                <div id="historyList" class="space-y-3">
+                    <!-- History Items will be injected here -->
+                    <div class="text-center text-gray-400 text-sm py-4 italic" id="emptyHistory">Belum ada transaksi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
