@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wize Promo - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        'wise-dark': '#163300',
+                        'wise-green': '#9FE870',
+                        'wise-green-hover': '#8ad15c',
+                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        oswald: ['Oswald', 'sans-serif'],
                     }
                 }
             }
@@ -22,75 +26,107 @@
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3 { font-family: 'Oswald', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
 
-    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden relative">
+    <div class="bg-white rounded-3xl shadow-xl w-full max-w-md overflow-hidden relative">
         
         <!-- Logout Button -->
-        <button id="logoutBtn" class="absolute top-4 right-4 text-white/80 hover:text-white transition-colors">
+        <button id="logoutBtn" class="absolute top-6 right-6 text-white/80 hover:text-wise-green transition-colors z-10">
             <i class="fa-solid fa-right-from-bracket text-xl"></i>
         </button>
 
         <!-- Header -->
-        <div class="bg-blue-600 p-6 text-center pt-10">
-            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
-                <i class="fa-solid fa-user text-2xl text-white"></i>
+        <div class="bg-wise-dark p-8 pb-12">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 bg-wise-green rounded-full flex items-center justify-center text-wise-dark font-bold text-xl">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-white tracking-tight" id="userNameDisplay">Hello, User</h1>
+                    <p class="text-wise-green text-sm font-medium" id="userPhoneDisplay">+62 8xx-xxxx-xxxx</p>
+                </div>
             </div>
-            <h1 class="text-2xl font-bold text-white tracking-wide" id="userNameDisplay">Halo, User</h1>
-            <p class="text-blue-100 text-sm" id="userPhoneDisplay">+62 8xx-xxxx-xxxx</p>
+            
+            <!-- Total Balance Label -->
+            <p class="text-white/60 text-sm font-medium">Total Balance</p>
         </div>
 
         <!-- Saldo Display -->
-        <div class="p-6 text-center -mt-6">
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-                <p class="text-gray-500 text-xs uppercase tracking-wide font-bold mb-1">Total Saldo Aktif</p>
-                <div class="grid grid-cols-2 gap-4 mb-2">
-                    <div class="bg-blue-50 p-3 rounded-lg border border-blue-100">
-                        <p class="text-[10px] text-blue-500 font-bold mb-1">SINGAPORE DOLLAR</p>
-                        <div class="text-2xl font-bold text-blue-700" id="saldoSGD">SGD 0</div>
+        <div class="px-6 -mt-8 mb-6">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <!-- SGD Section -->
+                <div class="p-5 border-b border-gray-100 flex justify-between items-center group hover:bg-gray-50 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                            <img src="https://flagcdn.com/w40/sg.png" class="w-6 h-4 object-cover rounded-sm shadow-sm" alt="SGD">
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Singapore Dollar</p>
+                            <div class="text-xl font-bold text-wise-dark" id="saldoSGD">SGD 0</div>
+                        </div>
                     </div>
-                    <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-100">
-                        <p class="text-[10px] text-emerald-500 font-bold mb-1">RINGGIT MALAYSIA</p>
-                        <div class="text-2xl font-bold text-emerald-700" id="saldoMYR">RM 0</div>
+                </div>
+
+                <!-- MYR Section -->
+                <div class="p-5 flex justify-between items-center group hover:bg-gray-50 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                            <img src="https://flagcdn.com/w40/my.png" class="w-6 h-4 object-cover rounded-sm shadow-sm" alt="MYR">
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Malaysian Ringgit</p>
+                            <div class="text-xl font-bold text-wise-dark" id="saldoMYR">RM 0</div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Tombol Tarik -->
-                <button id="withdrawBtn" class="mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors">
-                    <i class="fa-brands fa-whatsapp"></i> Tarik Saldo (Verifikasi Admin)
-                </button>
+                <!-- Action Buttons -->
+                <div class="p-4 bg-gray-50 grid grid-cols-2 gap-3">
+                     <button class="bg-white border border-gray-300 hover:bg-gray-100 text-wise-dark font-bold py-2 rounded-full text-sm transition-colors">
+                        <i class="fa-solid fa-plus mr-1"></i> Add money
+                    </button>
+                    <button id="withdrawBtn" class="bg-wise-green hover:bg-wise-green-hover text-wise-dark font-bold py-2 rounded-full text-sm transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrow-up mr-1"></i> Send / Withdraw
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- Form Section -->
         <div class="px-6 pb-8">
-            <div class="mb-4">
-                <h3 class="text-lg font-bold text-gray-800 mb-2">Klaim Kode Promo</h3>
-                <form id="promoForm" class="space-y-3">
-                    <div class="flex gap-2">
-                        <input type="text" id="promoCode" 
-                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors uppercase placeholder-gray-400 text-sm"
-                            placeholder="Masukan Kode" required>
-                        <button type="submit" 
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 rounded-lg transition-colors">
-                            <i class="fa-solid fa-check"></i>
-                        </button>
-                    </div>
+            <div class="mb-8">
+                <h3 class="text-lg font-bold text-wise-dark mb-4">Promo Code</h3>
+                <form id="promoForm" class="relative">
+                    <input type="text" id="promoCode" 
+                        class="w-full px-4 py-4 pr-14 border border-gray-300 rounded-xl focus:ring-2 focus:ring-wise-dark focus:border-wise-dark transition-colors uppercase placeholder-gray-400 text-wise-dark font-medium"
+                        placeholder="ENTER CODE" required>
+                    <button type="submit" 
+                        class="absolute right-2 top-2 bottom-2 bg-wise-dark hover:bg-gray-800 text-white w-12 rounded-lg transition-colors flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
                 </form>
             </div>
 
             <!-- Notification Area -->
-            <div id="notification" class="hidden p-3 rounded-lg text-sm font-medium text-center mb-4"></div>
+            <div id="notification" class="hidden p-4 rounded-xl text-sm font-medium text-center mb-6 shadow-sm"></div>
 
-            <!-- History (Static for Demo) -->
+            <!-- History -->
             <div>
-                <h3 class="text-sm font-bold text-gray-500 uppercase mb-3">Riwayat Transaksi</h3>
-                <div id="historyList" class="space-y-3">
+                <div class="flex justify-between items-end mb-4">
+                    <h3 class="text-lg font-bold text-wise-dark">Transactions</h3>
+                    <a href="#" class="text-wise-green font-bold text-sm hover:underline">See all</a>
+                </div>
+                
+                <div id="historyList" class="space-y-0 divide-y divide-gray-100">
                     <!-- History Items will be injected here -->
-                    <div class="text-center text-gray-400 text-sm py-4 italic" id="emptyHistory">Belum ada transaksi</div>
+                    <div class="text-center text-gray-400 text-sm py-8" id="emptyHistory">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-clock-rotate-left text-gray-400"></i>
+                        </div>
+                        No transactions yet
+                    </div>
                 </div>
             </div>
         </div>

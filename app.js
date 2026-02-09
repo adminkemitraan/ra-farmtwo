@@ -11,17 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const loginForm = document.getElementById('loginForm');
+        const phoneInput = document.getElementById('phoneNumber');
+
+        // Initialize intl-tel-input
+        const iti = window.intlTelInput(phoneInput, {
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            initialCountry: "id",
+            preferredCountries: ["id", "my", "sg"],
+            separateDialCode: true,
+        });
+
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const phone = document.getElementById('phoneNumber').value;
             const password = document.getElementById('password').value;
 
-            // VALIDASI SEDERHANA (Di sistem nyata, ini cek ke Database)
-            if (phone.length > 5 && password.length > 0) {
+            // VALIDASI NOMOR HP via Library
+            if (iti.isValidNumber() && password.length > 0) {
+                const phone = iti.getNumber(); // Ambil nomor format internasional (contoh: +62812345678)
+
                 // Simpan sesi login
                 localStorage.setItem('wizeIsLoggedIn', 'true');
-                localStorage.setItem('wizeUserPhone', phone);
+                localStorage.setItem('wizeUserPhone', phone); // Simpan nomor lengkap
                 
                 // Animasi loading tombol
                 const btn = loginForm.querySelector('button');
@@ -31,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = 'dashboard.html';
                 }, 1000);
             } else {
-                alert('Mohon isi nomor HP dan password dengan benar');
+                alert('Mohon isi nomor HP yang valid dan password.');
             }
         });
     }
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Tampilkan info user
         const userPhone = localStorage.getItem('wizeUserPhone');
-        userPhoneDisplay.textContent = `+62 ${userPhone}`;
+        userPhoneDisplay.textContent = userPhone;
 
         // Konfigurasi Kurs (Estimasi)
         const RATE_SGD_TO_MYR = 3.5; // 1 SGD = 3.5 MYR (contoh)
@@ -88,13 +99,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (history.length > 0) {
                 emptyHistory.style.display = 'none';
                 historyList.innerHTML = history.map(item => `
-                    <div class="flex justify-between items-center bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
-                        <div>
-                            <p class="font-bold text-gray-800 text-sm">${item.desc}</p>
-                            <p class="text-xs text-gray-400">${item.date}</p>
+                    <div class="flex justify-between items-center py-4 px-2 hover:bg-gray-50 transition-colors -mx-2 rounded-lg">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full ${item.type === 'in' ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'} flex items-center justify-center">
+                                <i class="fa-solid ${item.type === 'in' ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-wise-dark text-sm">${item.desc}</p>
+                                <p class="text-xs text-gray-500">${item.date}</p>
+                            </div>
                         </div>
                         <div class="text-right">
-                            <p class="${item.type === 'in' ? 'text-blue-600' : 'text-orange-500'} font-bold text-sm">
+                            <p class="${item.type === 'in' ? 'text-wise-dark' : 'text-wise-dark'} font-bold text-sm">
                                 ${item.type === 'in' ? '+' : '-'} ${formatCurrency(item.amountSGD, 'SGD')}
                             </p>
                             <p class="text-xs text-gray-400">
