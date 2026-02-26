@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT RA FARM INDONESIA - Linkbio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --secondary-text: #e0e0e0;
+            --accent-color: #ff914d;
+            --button-bg: #ff914d;
+            --button-text: #ffffff;
+            --button-hover: #ff7f2a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .profile-image {
+            width: 180px; /* Diperbesar lagi */
+            height: 180px; /* Diperbesar lagi */
+            border-radius: 50%;
+            object-fit: cover;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            background-color: transparent;
+            display: block;
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            color: #1DA1F2;
+            background: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .profile-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-bio {
+            font-size: 14px;
+            color: var(--text-color);
+            white-space: pre-line;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Links Section */
+        .links-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content */
+            background-color: var(--button-bg);
+            border: none;
+            border-radius: 25px; /* specific radius */
+            padding: 16px 24px;
+            text-decoration: none;
+            color: var(--button-text);
+            transition: transform 0.2s, background-color 0.2s;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .link-card.wa {
+            background: #25D366;
+            color: white;
+            border: none;
+        }
+        
+        .link-card.insta {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            border: none;
+        }
+        
+        .link-card.tele {
+            background: #0088cc;
+            color: white;
+            border: none;
+        }
+        
+        .link-card.pdf {
+            background: #E1306C; /* Or a neutral color */
+            background: #333;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .link-card:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+        .link-icon {
+            font-size: 24px;
+            width: 30px;
+            text-align: center;
+            color: var(--button-text);
+            position: absolute;
+            left: 20px;
+        }
+        
+        .link-text {
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        .link-arrow {
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profile -->
+        <div class="profile-section">
+            <!-- Ganti src dengan URL gambar logo Anda -->
+            <div class="profile-wrapper">
+                <img src="logo.png" alt="Logo PT RA FARM INDONESIA" class="profile-image">
+                <div class="verified-badge"><i class="fas fa-check-circle"></i></div>
+            </div>
+            
+            <h1 class="profile-title">PT RA FARM INDONESIA</h1>
+            
+            <p class="profile-bio">
+                Kemitraan ayam petelur
+                Legalitas & MOU Lengkap
+                CCTV Pantauan
+                Bagi hasil setiap 10 hari
+                100% Amanah
+                
+                GABUNG SEKARANG DAN NIKMATI HASILNYA 👇
+            </p>
+        </div>
+
+        <!-- Links -->
+        <div class="links-section">
+            <a href="https://wa.me/62895630264558" target="_blank" class="link-card wa">
+                <i class="fab fa-whatsapp link-icon" style="color: white;"></i>
+                <span class="link-text">WHATSAPP</span>
+                <div class="link-arrow"></div>
+            </a>
+            
+            <a href="https://instagram.com/Pt_ra_farm.id" target="_blank" class="link-card insta">
+                <i class="fab fa-instagram link-icon" style="color: white;"></i>
+                <span class="link-text">INSTAGRAM</span>
+                <div class="link-arrow"></div>
+            </a>
+
+            <style>
+                /* Info Box Style */
+                .info-box {
+                    width: 100%;
+                    border: 1px solid rgba(255,255,255,0.2);
+                    border-radius: 20px;
+                    padding: 25px;
+                    margin-top: 20px;
+                    background: rgba(255, 255, 255, 0.05); /* Glass effect matching package cards */
+                    backdrop-filter: blur(10px);
+                    text-align: left;
+                    font-size: 14px;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+                }
+                
+                .info-box h3 {
+                    font-size: 18px;
+                    margin-bottom: 15px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-weight: 700;
+                    color: white;
+                }
+                
+                .info-box ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                
+                .info-box ul li {
+                    margin-bottom: 10px;
+                    padding-left: 25px;
+                    position: relative;
+                    line-height: 1.6;
+                }
+                
+                .info-box ul li::before {
+                    content: '✔';
+                    position: absolute;
+                    left: 0;
+                    color: #4cd964;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+                
+                .highlight-text {
+                    color: #ff914d;
+                    font-weight: 700;
+                    display: block;
+                    margin-top: 20px;
+                    margin-bottom: 5px;
+                    font-size: 16px;
+                }
+                
+                .sub-highlight {
+                    font-size: 13px; 
+                    font-style: italic; 
+                    color: #ccc;
+                    margin-bottom: 15px;
+                    display: block;
+                }
+            </style>
+
+            <!-- Info Section Combined -->
+            <div class="info-box">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3 style="justify-content: center; font-size: 22px; margin-bottom: 10px;">🐔 PT RA FARM INDONESIA</h3>
+                    <p style="color: #ffd700; font-weight: 600;">🌟 Kemitraan Ayam Petelur Terbaik & Terpercaya 🌟</p>
+                </div>
+                
+                <span class="highlight-text">🔹 SISTEM BAGI HASIL</span>
+                <span class="sub-highlight">HARAP DIBACA & DIPAHAMI</span>
+                
+                <ul>
+                    <li>Kontrak 100 Hari / 10x Panen</li>
+                    <li>Pembagian hasil setiap 10 hari</li>
+                    <li>Investor & Peternak sama-sama untung</li>
+                </ul>
+                
+                <span class="highlight-text">🔹 KEUNGGULAN PT RA FARM INDONESIA</span>
+                
+                <ul>
+                    <li style="margin-top: 10px;">Legalitas & MOU resmi</li>
+                    <li>Pengelolaan profesional</li>
+                    <li>Laporan panen transparan</li>
+                    <li>Bisa investasi pasif → duduk santai, tetap untung</li>
+                </ul>
+                
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+                
+                <p style="margin-bottom: 15px; font-weight: 600;">Setiap kali panen, keuntungan bersih dibagi rata:</p>
+                <ul style="margin-bottom: 20px;">
+                    <li style="color: #4cd964;">50% untuk Anda (MITRA)</li>
+                    <li style="color: #ff914d;">50% untuk kami (Pengelola)</li>
+                </ul>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h4 style="color: #ffd700; margin-bottom: 10px; font-size: 16px;">💡 Contoh Simulasi Paket BRONZE:</h4>
+                    <p style="margin-bottom: 5px;">Modal: <strong>Rp 1.000.000</strong></p>
+                    <p style="margin-bottom: 5px;">Estimasi hasil Bersih 1x Panen: <strong>Rp 20.000.000</strong></p>
+                    <p style="margin-top: 10px; color: #4cd964; font-weight: 700; font-size: 16px;">👉 Maka Anda menerima: Rp 10.000.000/Panen</p>
+                </div>
+            </div>
+            
+            <!-- Rantai Distribusi & Pilihan Paket -->
+            <div class="package-card">
+                <img src="rantai distribusi.png" alt="Rantai Distribusi" class="package-image">
+                <div class="package-content">
+                    <h3 class="package-title-text" style="font-size: 16px;">RANTAI DISTRIBUSI</h3>
+                    <p class="package-subtitle">PT RA FARM INDONESIA</p>
+                </div>
+            </div>
+
+            <div class="package-card">
+                <h3 style="color: white; font-weight: 700; text-align: center; margin-bottom: 15px; font-size: 16px; font-style: italic; line-height: 1.4;">
+                    𝙋𝘼𝙆𝙀𝙏 𝙈𝙄𝙏𝙍𝘼 𝙐𝙎𝘼𝙃𝘼 𝙋𝙏 𝙍𝘼 𝙁𝘼𝙍𝙈 𝙄𝙉𝘿𝙊𝙉𝙀𝙎𝙄𝘼 & 𝙎𝙄𝙈𝙐𝙇𝘼𝙎𝙄 𝙋𝘼𝙉𝙀𝙉 𝘽𝙀𝙍𝙎𝙄𝙃 👇
+                </h3>
+                <img src="pilihan paket.jpg" alt="Pilihan Paket Titip Modal" class="package-image" style="margin-bottom: 0;">
+            </div>
+
+            <!-- Info Section 2 (Detail Paket & Proses) -->
+            <div class="info-box">
+                <div style="text-align: center; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px;">
+                    <h3 style="justify-content: center; color: #ff914d; font-size: 20px;">CARA BERGABUNG MITRA USAHA</h3>
+                </div>
+
+                <span class="highlight-text">🔹 1. Pilihan Paket Kemitraan:</span>
+                
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px; padding-left: 0;">
+                        🥉 <strong>PAKET BRONZE</strong> – Modal Rp 1.000.000 <br>
+                        <span style="color: #4cd964; font-weight: 600;">→ Profit 10 hari Rp 10.000.000</span>
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 0;">
+                        🥈 <strong>PAKET SILVER</strong> – Modal Rp 2.000.000 <br>
+                        <span style="color: #4cd964; font-weight: 600;">→ Profit 10 hari Rp 25.000.000</span>
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 0;">
+                        🥇 <strong>PAKET GOLD</strong> – Modal Rp 3.000.000 <br>
+                        <span style="color: #4cd964; font-weight: 600;">→ Profit 10 hari Rp 40.000.000</span>
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 0;">
+                        💎 <strong>PAKET PLATINUM</strong> – Modal Rp 4.000.000 <br>
+                        <span style="color: #4cd964; font-weight: 600;">→ Profit 10 hari Rp 60.000.000</span>
+                    </li>
+                </ul>
+
+                <span class="highlight-text">🔹 2. Transfer Modal ke Rekening Resmi</span>
+                <p style="margin-bottom: 10px;">Setelah transfer ke rekening perusahaan PT RA FARM INDONESIA, mitra akan menerima:</p>
+                <ul>
+                    <li>Surat MOU / Perjanjian Kerja Sama</li>
+                    <li>Bukti tanda terima modal</li>
+                </ul>
+
+                <span class="highlight-text">🔹 3. Modal Dikelola oleh Tim Ahli</span>
+                <p style="margin-bottom: 10px;">Dana digunakan untuk:</p>
+                <ul style="list-style-type: disc; padding-left: 20px;">
+                    <li style="padding-left: 5px; margin-bottom: 5px;">Pembelian ayam</li>
+                    <li style="padding-left: 5px; margin-bottom: 5px;">Pakan & vitamin</li>
+                    <li style="padding-left: 5px; margin-bottom: 5px;">Perawatan kandang</li>
+                    <li style="padding-left: 5px; margin-bottom: 5px;">Tenaga kerja</li>
+                </ul>
+                <p style="margin-top: 10px; font-style: italic;">Seluruh operasional dikelola oleh tim berpengalaman di bidang peternakan.</p>
+
+                <span class="highlight-text">🔹 4. Kontrak Kemitraan 10 Panen</span>
+                <p style="margin-bottom: 5px;">🗓️ Panen dilakukan setiap 10 hari sekali</p>
+                <p>📜 Durasi kerja sama: 10x panen (±3 bulan lebih)</p>
+
+                <span class="highlight-text">🔹 5. Sistem Bagi Hasil 50:50</span>
+                <p style="margin-bottom: 10px;">Keuntungan bersih dibagi secara adil:</p>
+                <ul>
+                    <li>50% untuk Mitra</li>
+                    <li>50% untuk Pengelola</li>
+                </ul>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border-left: 3px solid #ff914d; margin-top: 10px;">
+                    <p><strong>Contoh Paket BRONZE:</strong></p>
+                    <p>Modal: Rp 1.000.000</p>
+                    <p>Hasil Bersih per Panen: Rp 20.000.000</p>
+                    <p>Bagi Hasil 50:50 →</p>
+                    <p style="color: #4cd964; font-weight: 700;">👉 Mitra menerima: Rp 10.000.000 per panen</p>
+                </div>
+
+                <span class="highlight-text">🔹 6. Transparansi & Monitoring</span>
+                <p>📩 Laporan perkembangan rutin</p>
+                <p>📸 Dokumentasi panen</p>
+                <p>📍 Lokasi bisa dikunjungi langsung atau dipantau secara online</p>
+
+                <span class="highlight-text">🔹 7. Legalitas & Keamanan</span>
+                <ul>
+                    <li>MOU resmi</li>
+                    <li>Dokumen dapat dikirim via WhatsApp</li>
+                </ul>
+                <p>🔐 Sistem aman, transparan, dan saling menguntungkan</p>
+
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 25px 0;">
+
+                <ul style="font-weight: 500;">
+                    <li>Modal kecil – hasil besar</li>
+                    <li>Kontrak jelas (10x panen / 100 hari)</li>
+                    <li>Sudah dilengkapi izin usaha & MOU resmi</li>
+                    <li>Kerja sama profesional dengan peternak berpengalaman</li>
+                    <li>Profit cepat, stabil, & transparan</li>
+                    <li>Aman untuk passive income jangka panjang</li>
+                </ul>
+
+                <span class="highlight-text">🔹 KEUNGGULAN :</span>
+                <ul style="font-weight: 700; color: #ffd700;">
+                    <li>TANPA POTONGAN BIAYA</li>
+                    <li>PEMBAGIAN HASIL SETIAP 10 HARI SEKALI</li>
+                    <li>KONTRAK JELAS: 100 HARI (10x PANEN)</li>
+                    <li>AMAN, TRANSPARAN, & TERPERCAYA</li>
+                </ul>
+            </div>
+
+            <!-- Paket Section -->
+            <h2 style="color: white; font-size: 24px; margin: 30px 0 20px; text-align: center; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">PILIHAN PAKET INVESTASI</h2>
+
+            <style>
+                .package-card {
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.05); /* Glass background */
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 20px;
+                    overflow: hidden;
+                    position: relative;
+                    margin-bottom: 20px;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+                    backdrop-filter: blur(10px);
+                    padding: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .package-image {
+                    width: 100%;
+                    border-radius: 15px;
+                    margin-bottom: 15px;
+                    display: block;
+                }
+
+                .package-content {
+                    width: 100%;
+                    text-align: left;
+                }
+
+                .package-title-text {
+                    font-size: 20px;
+                    font-weight: 800;
+                    color: white;
+                    text-transform: uppercase;
+                    margin-bottom: 2px;
+                }
+
+                .package-subtitle {
+                    font-size: 12px;
+                    color: #ddd;
+                    font-weight: 500;
+                    margin-bottom: 15px;
+                    letter-spacing: 1px;
+                }
+
+                .btn-select {
+                    background: #ff914d;
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 50px;
+                    text-decoration: none;
+                    font-weight: 700;
+                    font-size: 14px;
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                    transition: transform 0.2s, background 0.2s;
+                    box-shadow: 0 4px 10px rgba(255, 145, 77, 0.4);
+                    border: none;
+                }
+
+                .btn-select:hover {
+                    background: #ff7f2a;
+                    transform: scale(1.02);
+                }
+            </style>
+
+            <!-- BRONZE -->
+            <div class="package-card">
+                <img src="bronze.png" alt="Paket Bronze" class="package-image">
+                <div class="package-content">
+                    <h3 class="package-title-text">PAKET BRONZE</h3>
+                    <p class="package-subtitle">PT RA FARM INDONESIA</p>
+                    <a href="https://wa.me/62895630264558?text=Halo%20Admin%2C%20saya%20tertarik%20dengan%20PAKET%20BRONZE%20(Rp%201.000.000)" target="_blank" class="btn-select">
+                        Klik / Pilih Paket BRONZE
+                    </a>
+                </div>
+            </div>
+
+            <!-- SILVER -->
+            <div class="package-card">
+                <img src="silver.png" alt="Paket Silver" class="package-image">
+                <div class="package-content">
+                    <h3 class="package-title-text">PAKET SILVER</h3>
+                    <p class="package-subtitle">PT RA FARM INDONESIA</p>
+                    <a href="https://wa.me/62895630264558?text=Halo%20Admin%2C%20saya%20tertarik%20dengan%20PAKET%20SILVER%20(Rp%201.800.000)" target="_blank" class="btn-select">
+                        Klik / Pilih Paket SILVER
+                    </a>
+                </div>
+            </div>
+
+            <!-- GOLD -->
+            <div class="package-card">
+                <img src="gold.png" alt="Paket Gold" class="package-image">
+                <div class="package-content">
+                    <h3 class="package-title-text">PAKET GOLD</h3>
+                    <p class="package-subtitle">PT RA FARM INDONESIA</p>
+                    <a href="https://wa.me/62895630264558?text=Halo%20Admin%2C%20saya%20tertarik%20dengan%20PAKET%20GOLD%20(Rp%202.500.000)" target="_blank" class="btn-select">
+                        Klik / Pilih Paket GOLD
+                    </a>
+                </div>
+            </div>
+
+            <!-- PLATINUM -->
+            <div class="package-card">
+                <img src="platinum.png" alt="Paket Platinum" class="package-image">
+                <div class="package-content">
+                    <h3 class="package-title-text">PAKET PLATINUM</h3>
+                    <p class="package-subtitle">PT RA FARM INDONESIA</p>
+                    <a href="https://wa.me/62895630264558?text=Halo%20Admin%2C%20saya%20tertarik%20dengan%20PAKET%20PLATINUM%20(Rp%203.400.000)" target="_blank" class="btn-select">
+                        Klik / Pilih Paket PLATINUM
+                    </a>
+                </div>
+            </div>
+
+            <!-- DIAMOND -->
+            <div class="package-card">
+                <img src="diamond.png" alt="Paket Diamond" class="package-image">
+                <div class="package-content">
+                    <h3 class="package-title-text">PAKET DIAMOND</h3>
+                    <p class="package-subtitle">PT RA FARM INDONESIA</p>
+                    <a href="https://wa.me/62895630264558?text=Halo%20Admin%2C%20saya%20tertarik%20dengan%20PAKET%20DIAMOND%20(Rp%205.500.000)" target="_blank" class="btn-select">
+                        Klik / Pilih Paket DIAMOND
+                    </a>
+                </div>
+            </div>
+
+            <!-- SUPER VVIP -->
+            <div class="package-card">
+                <img src="super%20vvip.png" alt="Paket Super VVIP" class="package-image">
+                <div class="package-content">
+                    <h3 class="package-title-text">PAKET SUPER VVIP</h3>
+                    <p class="package-subtitle">PT RA FARM INDONESIA</p>
+                    <a href="https://wa.me/62895630264558?text=Halo%20Admin%2C%20saya%20tertarik%20dengan%20PAKET%20SUPER%20VVIP%20(Rp%2010.000.000)" target="_blank" class="btn-select">
+                        Klik / Pilih Paket SUPER VVIP
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="width: 100%; margin-top: 20px;">
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 25px 20px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                <p style="font-size: 16px; font-weight: 700; color: #ff914d; margin-bottom: 5px;">🚀 Ayo Bergabung Sekarang!</p>
+                <p style="font-size: 13px; color: white; line-height: 1.5; margin-bottom: 20px;">🔥 Jangan lewatkan kesempatan meraih keuntungan bersama PT RA FARM INDONESIA</p>
+                
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <i class="fab fa-instagram" style="font-size: 24px; color: white;"></i>
+                    <i class="fab fa-twitter" style="font-size: 24px; color: white;"></i>
+                    <i class="fab fa-facebook" style="font-size: 24px; color: white;"></i>
+                </div>
+            </div>
+            
+            <div class="footer">
+                &copy; 2026 PT RA FARM INDONESIA. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
